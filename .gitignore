@@ -134,3 +134,4 @@ $RECYCLE.BIN/
 *.sublime-project
 *.sublime-workspace
 package-lock.json
+/.idea/

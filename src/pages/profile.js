@@ -40,7 +40,7 @@ const cleanFavourites = arr => arr.filter(i => i && i.id);
 export default class Profile extends React.Component {
 	static async getInitialProps({ req }) {
 		// We need to forward the request headers on the server.
-		const options = !!req ? { headers: req.headers } : {};
+		const options = req ? { headers: req.headers } : {};
 		const { user } = await fetchUser(options);
 		const { favorites } = await fetchFavorites(options);
 		return { favorites: cleanFavourites(favorites), user };
@@ -58,7 +58,7 @@ export default class Profile extends React.Component {
 		) : (
 			<Page
 				main={
-					<Fragment>
+					<>
 						<Head>
 							<title>Your Profile</title>
 						</Head>
@@ -68,7 +68,7 @@ export default class Profile extends React.Component {
 								<JobItem key={job.id} job={job} index={idx} />
 							))}
 						</Card>
-					</Fragment>
+					</>
 				}
 			/>
 		);

@@ -24,10 +24,10 @@ const paragraphs = [
 ];
 
 function shuffle(arr) {
-	var array = arr.slice(0); // clone
-	var m = array.length,
-		t,
-		i;
+	const array = arr.slice(0); // clone
+	let m = array.length;
+	let t;
+	let i;
 
 	// While there remain elements to shuffle…
 	while (m) {

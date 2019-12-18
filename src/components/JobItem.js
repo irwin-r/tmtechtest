@@ -7,7 +7,7 @@ import { FavoriteInline } from './Favorite';
 import { Link } from './Router';
 
 export const JobItem = ({ job, index }) => (
-	<Fragment>
+	<>
 		{index ? (
 			<div
 				className={css({
@@ -47,5 +47,5 @@ export const JobItem = ({ job, index }) => (
 				</FlexGroup>
 			</FlexGroup>
 		</div>
-	</Fragment>
+	</>
 );

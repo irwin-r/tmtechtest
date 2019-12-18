@@ -63,7 +63,7 @@ function makeVariant(appearance) {
 
 export const Button = forwardRef(
 	({ appearance, className, isBlock, isDisabled, size, ...rest }, ref) => {
-		let props = rest;
+		const props = rest;
 		let as = 'span';
 		if (props.href) {
 			as = 'a';
@@ -85,7 +85,7 @@ export const Button = forwardRef(
 				ref={ref}
 				className={css({
 					appearance: 'none',
-					borderRadius: borderRadius,
+					borderRadius,
 					border: 0,
 					boxShadow: `inset 0 -2px 0 rgba(0, 0, 0, 0.16)`,
 					cursor: isDisabled ? 'default' : 'pointer',
