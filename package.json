@@ -1,0 +1,29 @@
+{
+	"name": "skill-assessment",
+	"version": "1.0.0",
+	"author": "Thinkmill Pty Ltd",
+	"description": "Thinkmill Skill Assessment",
+	"scripts": {
+		"format:config": "prettier",
+		"format": "npm run format:config -- --write \"**/*.{js,md}\"",
+		"test:format": "npm run format:config -- --list-different \"**/*.{js,md}\"",
+		"test": "npm run test:format",
+		"start": "node server.js"
+	},
+	"dependencies": {
+		"@githubprimer/octicons-react": "^8.1.0",
+		"body-parser": "^1.18.3",
+		"cookie-session": "^2.0.0-beta.3",
+		"emotion": "^9.2.12",
+		"emotion-server": "^9.2.12",
+		"express": "^4.16.3",
+		"isomorphic-unfetch": "^3.0.0",
+		"next": "^7.0.2",
+		"prop-types": "^15.6.2",
+		"react": "^16.6.3",
+		"react-dom": "^16.6.3"
+	},
+	"devDependencies": {
+		"prettier": "^1.15.2"
+	}
+}
