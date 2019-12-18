@@ -7,7 +7,7 @@ export const Card = ({ pad, ...props }) => (
 		className={css({
 			backgroundColor: 'white',
 			boxShadow: '0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1)',
-			borderRadius: borderRadius,
+			borderRadius,
 			marginBottom: gutter * 3,
 			padding: pad ? gutter * 2 : null,
 		})}

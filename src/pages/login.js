@@ -12,7 +12,9 @@ import { Redirect } from '../components/Router';
 
 export class LoginForm extends React.Component {
 	state = { username: '', error: false };
+
 	inputRef = React.createRef();
+
 	componentDidMount() {
 		this.inputRef.current.focus();
 	}
@@ -68,7 +70,7 @@ export class LoginForm extends React.Component {
 export default class Login extends React.Component {
 	render() {
 		return (
-			<Fragment>
+			<>
 				<Head>
 					<title>Login</title>
 				</Head>
@@ -89,7 +91,7 @@ export default class Login extends React.Component {
 						<GridCell width={3} />
 					</Grid>
 				</Container>
-			</Fragment>
+			</>
 		);
 	}
 }

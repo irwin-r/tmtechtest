@@ -8,7 +8,7 @@
 		"format": "npm run format:config -- --write \"**/*.{js,md}\"",
 		"test:format": "npm run format:config -- --list-different \"**/*.{js,md}\"",
 		"test": "npm run test:format",
-		"start": "node server.js"
+		"start": "node src/server.js"
 	},
 	"dependencies": {
 		"@githubprimer/octicons-react": "^8.5.0",

@@ -71,7 +71,7 @@ export default class Home extends Component {
 		const hasNoResults = jobs.length === 0;
 
 		return (
-			<Fragment>
+			<>
 				<Head>
 					<title>Job Search</title>
 				</Head>
@@ -95,7 +95,7 @@ export default class Home extends Component {
 						</Card>
 					}
 					aside={
-						<Fragment>
+						<>
 							<p>Let employers find you:</p>
 							<Button
 								appearance="secondary"
@@ -104,10 +104,10 @@ export default class Home extends Component {
 							>
 								Upload your resumé
 							</Button>
-						</Fragment>
+						</>
 					}
 				/>
-			</Fragment>
+			</>
 		);
 	}
 }

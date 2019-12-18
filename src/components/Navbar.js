@@ -112,6 +112,7 @@ export const NavUserName = ({ user }) => (
 
 export default class Navbar extends Component {
 	state = { spacerHeight: 68 };
+
 	headerRef = createRef();
 
 	componentDidMount = () => {
@@ -125,7 +126,7 @@ export default class Navbar extends Component {
 		return (
 			<UserConsumer>
 				{({ user }) => (
-					<Fragment>
+					<>
 						<ScrollSensor>
 							{({ scrollY }) => (
 								<Header ref={this.headerRef} hasScroll={Boolean(scrollY)}>
@@ -155,7 +156,7 @@ export default class Navbar extends Component {
 							)}
 						</ScrollSensor>
 						<div style={{ height: spacerHeight, marginBottom: gutter * 3 }} />
-					</Fragment>
+					</>
 				)}
 			</UserConsumer>
 		);

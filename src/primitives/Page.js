@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import { Container, GridCell, Grid, Use } from '../primitives';
+import { Container, GridCell, Grid, Use } from './index';
 import { gutter } from '../utils';
 
 export const Page = ({ contain = true, main, aside }) => (

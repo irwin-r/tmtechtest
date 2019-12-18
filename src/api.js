@@ -29,7 +29,7 @@ router.post('/login', (req, res) => {
 
 	if (user) {
 		req.session = {
-			user: user,
+			user,
 		};
 
 		if (redirect) {
@@ -37,9 +37,8 @@ router.post('/login', (req, res) => {
 			return;
 		}
 		return res.json({ success: true });
-	} else {
-		res.status(400).json({ error: 'Invalid user' });
 	}
+	res.status(400).json({ error: 'Invalid user' });
 });
 router.post('/logout', (req, res) => {
 	const { redirect } = req.body;
@@ -65,9 +64,8 @@ router.get('/jobs', (req, res) => {
 		return res.json({
 			jobs: searchJobs(search).slice(begin, end),
 		});
-	} else {
-		return res.json({ jobs: JOBS.slice(begin, end) });
 	}
+	return res.json({ jobs: JOBS.slice(begin, end) });
 });
 router.get('/jobs/:id', (req, res) =>
 	res.json({ job: getJobById(req.params.id) })
@@ -82,9 +80,8 @@ router.get('/favorites', (req, res) => {
 		const data = favorites.map(favorite => getJobById(favorite));
 		req.session.user.favorites = data;
 		return res.json({ favorites: data });
-	} else {
-		res.status(403).json({ error: 'You have to be logged in to favor a job' });
 	}
+	res.status(403).json({ error: 'You have to be logged in to favor a job' });
 });
 router.post('/favorites/save', (req, res) => {
 	const { user, redirect } = req.session;
@@ -104,9 +101,8 @@ router.post('/favorites/save', (req, res) => {
 			return;
 		}
 		return res.json({ favorites });
-	} else {
-		res.status(403).json({ error: 'You have to be logged in to favor a job' });
 	}
+	res.status(403).json({ error: 'You have to be logged in to favor a job' });
 });
 router.post('/favorites/remove', (req, res) => {
 	const { user, redirect } = req.session;
@@ -124,9 +120,8 @@ router.post('/favorites/remove', (req, res) => {
 			return;
 		}
 		return res.json({ favorites: newFavorites });
-	} else {
-		res.status(403).json({ error: 'You have to be logged in to favor a job' });
 	}
+	res.status(403).json({ error: 'You have to be logged in to favor a job' });
 });
 
 module.exports = router;

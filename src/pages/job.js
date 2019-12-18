@@ -37,7 +37,7 @@ export default class Details extends Component {
 		if (!job) return <NotFound />;
 
 		return (
-			<Fragment>
+			<>
 				<Head>
 					<title>Job Details: {job.title}</title>
 				</Head>
@@ -82,7 +82,7 @@ export default class Details extends Component {
 						</aside>
 					}
 				/>
-			</Fragment>
+			</>
 		);
 	}
 }
