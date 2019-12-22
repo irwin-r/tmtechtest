@@ -1,7 +1,10 @@
 export { colors } from './colors';
+export { default as createTokenExpiryDate } from './createTokenExpiryDate';
+export * from './environment';
+export { default as getJwtSecret } from './getJwtSecret';
 export { history } from './history';
 export { throttle } from './throttle';
-export { generateLoremIpsum, Lorem } from './lorem';
+// export { generateLoremIpsum, Lorem } from './lorem';
 
 export const gutter = 8;
 export const borderRadius = 3;
