@@ -26,4 +26,14 @@ export default {
 		removeFavorite,
 		saveFavorite,
 	},
+
+	User: {
+		favorites(parent, _, { dataSources: { jobService, userService } }) {
+			const favoritesIds = Array.from(
+				userService.findById(parent.id).favorites
+			);
+
+			return favoritesIds.map(jobId => jobService.findById(jobId));
+		},
+	},
 };
