@@ -16,6 +16,8 @@
 		"@babel/preset-env": "^7.7.7",
 		"@babel/register": "^7.7.7",
 		"@githubprimer/octicons-react": "^8.5.0",
+		"apollo-errors": "^1.9.0",
+		"apollo-resolvers": "^1.4.1",
 		"apollo-server-errors": "latest",
 		"apollo-server-express": "^2.9.14",
 		"body-parser": "^1.19.0",
