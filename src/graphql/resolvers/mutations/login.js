@@ -3,28 +3,36 @@ import { AuthenticationError } from 'apollo-server-errors';
 import { JWT_COOKIE_NAME } from '../../../constants';
 import createTokenExpiryDate from '../../../utils/createTokenExpiryDate';
 
-const login = (parent, { email }, { dataSources, res }) => {
-	const { sessionService, userService } = dataSources;
+import { baseResolver } from '../acl';
 
-	const user = userService.findByEmail(email);
+const login = baseResolver.createResolver(
+	(parent, { email }, { dataSources, res }) => {
+		const { sessionService, userService } = dataSources;
 
-	if (!user) {
-		throw new AuthenticationError('Invalid user');
+		const user = userService.findByEmail(email);
+
+		if (!user) {
+			throw new AuthenticationError('Invalid user');
+		}
+
+		const expires = createTokenExpiryDate();
+		const token = sessionService.create(user.id, expires);
+
+		res.cookie(JWT_COOKIE_NAME, token, {
+			expires,
+			httpOnly: true,
+			sameSite: true,
+		});
+
+		return {
+			expires,
+			token,
+		};
 	}
+);
 
-	const expires = createTokenExpiryDate();
-	const token = sessionService.create(user.id, expires);
-
-	res.cookie(JWT_COOKIE_NAME, token, {
-		expires,
-		httpOnly: true,
-		sameSite: true,
-	});
-
-	return {
-		expires,
-		token,
-	};
+export default {
+	Mutation: {
+		login,
+	},
 };
-
-export default login;

@@ -1,4 +1,9 @@
-const getJobs = (parent, _, { dataSources: { jobService } }) =>
-	jobService.findAll();
+import { baseResolver } from '../acl';
 
-export default getJobs;
+const jobs = baseResolver.createResolver(
+	(parent, _, { dataSources: { jobService } }) => jobService.findAll()
+);
+
+export default {
+	Query: { jobs },
+};
