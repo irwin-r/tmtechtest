@@ -2,6 +2,7 @@ export { colors } from './colors';
 export { default as createTokenExpiryDate } from './createTokenExpiryDate';
 export * from './environment';
 export { default as getJwtSecret } from './getJwtSecret';
+export { default as getListenPort } from './getListenPort';
 export { history } from './history';
 export { throttle } from './throttle';
 // export { generateLoremIpsum, Lorem } from './lorem';
