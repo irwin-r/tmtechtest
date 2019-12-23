@@ -1,25 +1,33 @@
 import { UserInputError } from 'apollo-server-errors';
 
-const removeFavorite = (parent, { jobId }, context) => {
-	const {
-		dataSources: { jobService, userService },
-		session,
-	} = context;
+import { authenticatedResolver } from '../acl';
 
-	const user = userService.findById(session.userId);
-	const job = jobService.findById(jobId);
+const saveFavorite = authenticatedResolver.createResolver(
+	(parent, { jobId }, context) => {
+		const {
+			dataSources: { jobService, userService },
+			session,
+		} = context;
 
-	if (!job) {
-		throw new UserInputError('Job does not exist');
+		const user = userService.findById(session.userId);
+		const job = jobService.findById(jobId);
+
+		if (!job) {
+			throw new UserInputError('Job does not exist');
+		}
+
+		user.favorites.add(jobId);
+
+		// In reality, the below isn't actually needed as user.favourites is a REFERENCE to a Set
+		// But in the real world you would need to persist this to a database
+		userService.update(user);
+
+		return user;
 	}
+);
 
-	user.favorites.add(jobId);
-
-	// In reality, the below isn't actually needed as user.favourites is a REFERENCE to a Set
-	// But in the real world you would need to persist this to a database
-	userService.update(user);
-
-	return user;
+export default {
+	Mutation: {
+		saveFavorite,
+	},
 };
-
-export default removeFavorite;

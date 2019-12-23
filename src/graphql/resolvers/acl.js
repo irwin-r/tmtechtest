@@ -6,7 +6,7 @@ export const baseResolver = createResolver(
 	(root, args, context, error) => error
 );
 
-export const isAuthenticatedResolver = baseResolver.createResolver(
+export const authenticatedResolver = baseResolver.createResolver(
 	(root, args, { session }) => {
 		if (!session) {
 			throw new ForbiddenError();

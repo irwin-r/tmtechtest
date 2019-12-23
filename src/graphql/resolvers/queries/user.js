@@ -1,16 +1,20 @@
-const getUser = (parent, _, context) => {
+import { authenticatedResolver } from '../acl';
+
+const user = authenticatedResolver.createResolver((parent, _, context) => {
 	const {
 		dataSources: { userService },
 		session,
 	} = context;
 
-	const user = userService.findById(session.userId);
+	const currentUser = userService.findById(session.userId);
 
-	if (!user) {
+	if (!currentUser) {
 		throw new Error('User not found');
 	}
 
-	return user;
-};
+	return currentUser;
+});
 
-export default getUser;
+export default {
+	Query: { user },
+};
