@@ -10,7 +10,7 @@ const typeDefs = gql`
 		logo: String
 		source: String!
 		suburb: String!
-		labels: [String]
+		labels: [String!]
 		description: String
 		dateAdded: DateTime!
 	}
@@ -24,12 +24,13 @@ const typeDefs = gql`
 		id: Int!
 		name: String!
 		email: EmailAddress!
-		favorites: [Job]
+		favorites: [Job!]
 	}
+
 	type Query {
 		job(jobId: String!): Job
-		jobs: [Job]
-		user: User
+		jobs(searchTerm: String, offset: Int = 0, limit: Int = 20): [Job!]
+		user: User!
 	}
 
 	type Mutation {
