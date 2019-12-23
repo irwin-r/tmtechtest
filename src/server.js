@@ -1,45 +1,56 @@
-const cookieSession = require('cookie-session');
-const bodyParser = require('body-parser');
-const express = require('express');
-const nextApp = require('next');
+import { ApolloServer } from 'apollo-server-express';
+import cookieParser from 'cookie-parser';
+import Express from 'express';
+import jwt from 'express-jwt';
+import Next from 'next';
 
-const port = parseInt(process.env.PORT, 10) || 3000;
-const dev = process.env.NODE_ENV !== 'production';
-const app = nextApp({ dev });
-const handle = app.getRequestHandler();
+import { JWT_COOKIE_NAME } from './constants';
+import { createContext, dataSources, resolvers, typeDefs } from './graphql';
+import { getJwtSecret, getListenPort, isDevelopmentEnvironment } from './utils';
 
-app.prepare().then(() => {
-	const server = express();
+(async () => {
+	const next = Next({
+		dev: isDevelopmentEnvironment(),
+	});
 
-	// Serve staic assets
-	server.use(express.static('./public'));
+	await next.prepare();
 
-	// API
-	server.use(
-		'/api',
-		cookieSession({
-			httpOnly: false,
-			keys: ['super-secret-key'],
-			maxAge: 24 * 60 * 60 * 1000,
-			name: 'thinkmill-training',
+	const apollo = new ApolloServer({
+		context: createContext,
+		dataSources,
+		playground: {
+			settings: {
+				'request.credentials': 'include', // ensure our JWT cookie is getting used in the playground
+			},
+		},
+		resolvers,
+		typeDefs,
+	});
+
+	const express = Express();
+
+	express.use(cookieParser());
+
+	express.use(
+		jwt({
+			credentialsRequired: false,
+			getToken: req => req?.cookies?.[JWT_COOKIE_NAME],
+			requestProperty: 'session',
+			secret: getJwtSecret(),
 		})
 	);
-	server.use('/api', bodyParser.json());
-	server.use('/api', bodyParser.urlencoded({ extended: true }));
-	server.use('/api', require('./api'));
 
-	// Dynamic Job Route
-	server.get('/job/:jobId', (req, res) => {
-		// Pass the params in
+	apollo.applyMiddleware({ app: express, bodyParserConfig: true });
+
+	express.use(Express.static('../public'));
+
+	express.get('/job/:jobId', (req, res) => {
 		const { jobId } = req.params;
-		app.render(req, res, '/job', { jobId, ...req.query });
+
+		next.render(req, res, '/job', { jobId, ...req.query });
 	});
 
-	// Handle all other routes
-	server.get('*', handle);
+	express.get('*', next.getRequestHandler());
 
-	server.listen(port, error => {
-		if (error) throw error;
-		console.log(`Server started on http://localhost:${port}`);
-	});
-});
+	express.listen(getListenPort());
+})();
