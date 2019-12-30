@@ -1,24 +1,30 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-import { NotFound } from '../components/NotFound';
+import NotFound from '../components/NotFound';
 
-export default class Error extends React.Component {
-	static getInitialProps({ res, err }) {
-		const statusCode = res ? res.statusCode : err ? err.statusCode : null;
-		return { statusCode };
+const Error = ({ statusCode }) => {
+	if (statusCode === 404) {
+		return <NotFound />;
 	}
 
-	render() {
-		const { statusCode } = this.props;
+	const reason = statusCode
+		? `A ${statusCode} error occurred on the server.`
+		: 'An error occurred.';
 
-		if (statusCode === 404) return <NotFound />;
+	return <p>{reason}</p>;
+};
 
-		return (
-			<p>
-				{statusCode
-					? `A ${statusCode} error occurred on the server.`
-					: 'An error occurred.'}
-			</p>
-		);
-	}
-}
+Error.defaultProps = {
+	statusCode: null,
+};
+
+Error.propTypes = {
+	statusCode: PropTypes.number,
+};
+
+Error.getInitialProps = ({ res, err }) => ({
+	statusCode: res?.statusCode ?? err?.statusCode ?? null,
+});
+
+export default Error;
