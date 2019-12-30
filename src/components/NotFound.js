@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+
 import { Button, Page, H1 } from '../primitives';
 
-export const NotFound = () => (
+const NotFound = () => (
 	<Page
 		main={
 			<>
@@ -14,3 +15,5 @@ export const NotFound = () => (
 		}
 	/>
 );
+
+export default NotFound;
