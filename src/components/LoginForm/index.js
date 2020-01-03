@@ -31,7 +31,9 @@ const LoginForm = () => {
 	});
 
 	useEffect(() => {
-		setError(mutationError?.message);
+		setError(
+			mutationError?.graphQLErrors[0]?.message ?? mutationError?.message
+		);
 
 		return () => {};
 	}, [mutationError]);
