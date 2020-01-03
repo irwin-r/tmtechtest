@@ -1,22 +1,25 @@
 import { useQuery } from '@apollo/react-hooks';
-import React, { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
 import { JobItem, NoResults, SearchForm } from '../components';
 import { Button, Card, Container, Page } from '../primitives';
 
 import { GET_JOBS_QUERY } from './_queries';
 
-const HomePage = () => {
+const HomePage = ({ initialSearchTerm }) => {
 	const router = useRouter();
-	const [searchTerm, setSearchTerm] = useState(router.query?.search ?? '');
+	const [searchTerm, setSearchTerm] = useState(router.query?.search);
 	const {
 		data: { jobs = [] } = {},
 		error,
 		loading,
 		refetch: getJobs,
-	} = useQuery(GET_JOBS_QUERY);
+	} = useQuery(GET_JOBS_QUERY, {
+		variables: { searchTerm: initialSearchTerm },
+	});
 
 	const fetchJobs = (term = searchTerm) => getJobs({ searchTerm: term });
 
@@ -83,5 +86,17 @@ const HomePage = () => {
 		</>
 	);
 };
+
+HomePage.defaultProps = {
+	initialSearchTerm: undefined,
+};
+
+HomePage.propTypes = {
+	initialSearchTerm: PropTypes.string,
+};
+
+HomePage.getInitialProps = ({ query: { search } } = {}) => ({
+	initialSearchTerm: search,
+});
 
 export default HomePage;
