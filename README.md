@@ -1,60 +1,60 @@
 # THINKMILL Skill Assessment
 
-Hi there! 👋
+👤 **Irwin Razaghi**
 
-Welcome to Thinkmill's skill assessment! We like to think of it as a chance for both sides to get a feel for what it would be like working together.
+* Website: razaghi.com.au
+* Github: [@irwin-r](https://github.com/irwin-r)
+* LinkedIn: [@irwinrazaghi](https://linkedin.com/in/irwinrazaghi)
 
-More context about [why we do this skill assessment](#some-context-about-this-skill-assessment) can be found below.
+## Install
 
----
+```sh
+yarn
+```
 
-## Instructions
+## Run Locally
 
-- Convert the app from RESTful to [GraphQL](https://graphql.org/).
-- Please use [Apollo Server](https://github.com/apollographql/apollo-server) and [Apollo Client](https://github.com/apollographql/apollo-client).
-- Fill in the [notes](#notes) section below.
-- Add all observations in there. the more the better. It will help us with the second interview.
-- Submit a PR
+```sh
+yarn start:local
+```
 
-### What should I do when I'm done?
 
-When you're ready to submit your work and come in for a chat, submit a pull request. Then please send us a message to schedule in the next interview.
+## Notes
 
-When that happens, we'll schedule a meeting time to talk about it!
+- ***What are your thoughts on this app?***
 
-### Notes
+  This was probably the most time consuming tech test I've ever done.
+  Given that there's another tech test with Atlassian, if I'm successful, my main thoughts are "I *really* hope this is well-received" 😛
+  
+- ***What were the difficulties you ran into?***
 
-_PLEASE FILL ME OUT_
+  `@apollo/react-hooks` is a relatively new library and when combined with SSR, there are multiple poorly-documented gotchas.
+  
+- ***What would you improve given more time?***
 
-- What are your thoughts on this app?
-- What were the difficulties you ran into?
-- What would you improve given more time?
-- What would be the next steps?
-- How long did it take you?
-- How could this skill assessment be made better?
+  Good question.  Given more time, the main things that come to mind are:
+  * Break up the querying of data more;  better utilise fragments and not over-fetch data until required.
+  * Break up the Apollo Server's schema more
+  * I'm a big fan of TDD and given more time, I would've loved to write some tests
+  * Look into serving the Apollo Server using Next.js' API routes
+  
+- ***What would be the next steps?***
 
----
+  In the context of this technical test?
+  * Tests!
+  * There's an outstanding bug where the job page will render the lorem text twice.
+  * CI/CD, although ZEIT Now kind of makes this trivial.
+  * Leverage a proper persistence layer?
+  * i18n
+  
+- ***How long did it take you?***
+  
+  On and off, maybe a day and a half?
 
-## Some context about this skill assessment.
+- ***How could this skill assessment be made better?***
 
-Why do we do this skill assessment? How should it be approached? Please consider the following:
-
-### 1. It's a conversation starter.
-
-The purpose of this skill assessment is to create a discussion framework when you come in for the techical interview. This leads to a much more meaningful conversations about a potential technical match, for you and for Thinkmill.
-
-### 2. It's okay if you struggle and can't complete the challenge.
-
-This skill assessment is meant to be challenging, and push you out of your comfort zone. You might not be able to complete it, and that's okay. This doesn't mean you're disqualified!
-
-If you feel like you couldn't showcase your real skills, perhaps you can find a way to let them shine! You love accessibility? Unit tests? You're welcome to add those, or anything that you think could improve the app and let you show us what you're good at.
-
-### 3. Treat it like a mini "real work"/"remote work" situation.
-
-We want this skill assessment to be as close to "real life" as possible. We want it to feel like you're working with us. Always keep that in mind.
-
-It's ok to ask questions. Actually, it's encouraged to reach out if you're struggling. It gives us a chance to get a feel for your collaboration and communication skills :)
-
-The best way to ask a question is to send an email to the person you interviewed with prior to this skill assessment.
-
-Good luck! 🤞
+  The initially provided code is a bit messy, things are imported that don't need to be, modern React features aren't used, Next.js' dynamic routes features aren't used, etc.
+  
+  I don't have any specific ideas, but anything to make the test more concise and less time-consuming would also be very welcome.
+  
+  
