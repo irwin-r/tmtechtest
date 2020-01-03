@@ -11,7 +11,7 @@ import { GET_JOBS_QUERY } from './_queries';
 
 const HomePage = ({ initialSearchTerm }) => {
 	const router = useRouter();
-	const [searchTerm, setSearchTerm] = useState(router.query?.search);
+	const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
 	const {
 		data: { jobs = [] } = {},
 		error,
@@ -88,7 +88,7 @@ const HomePage = ({ initialSearchTerm }) => {
 };
 
 HomePage.defaultProps = {
-	initialSearchTerm: undefined,
+	initialSearchTerm: '',
 };
 
 HomePage.propTypes = {
