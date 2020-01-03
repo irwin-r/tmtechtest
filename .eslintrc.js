@@ -30,6 +30,14 @@ module.exports = {
 	},
 	plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y'],
 	rules: {
+		'jsx-a11y/label-has-associated-control': [
+			2,
+			{
+				labelAttributes: ['label'],
+				controlComponents: ['Input'],
+				depth: 3,
+			},
+		],
 		'prettier/prettier': ['error', prettierOptions],
 		'react/jsx-filename-extension': 0,
 		'react/jsx-props-no-spreading': 0,
