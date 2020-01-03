@@ -8,7 +8,8 @@
 		"format": "npm run format:config -- --write \"**/*.{js,md}\"",
 		"test:format": "npm run format:config -- --list-different \"**/*.{js,md}\"",
 		"test": "npm run test:format",
-		"start": "node src/index.js"
+		"start": "node src/index.js",
+		"start:local": "NODE_ENV=development node src/index.js"
 	},
 	"dependencies": {
 		"@apollo/react-hooks": "^3.1.3",
