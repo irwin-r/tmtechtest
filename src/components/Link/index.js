@@ -9,8 +9,12 @@ const Link = React.forwardRef(({ to, as, ...props }, ref) => (
 	</NextLink>
 ));
 
+Link.defaultProps = {
+	as: undefined,
+};
+
 Link.propTypes = {
-	as: urlShape.isRequired,
+	as: urlShape,
 	to: urlShape.isRequired,
 };
 
