@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Page, H1 } from '../primitives';
+import { Button, Page, H1 } from '../../primitives';
 
 const NotFound = () => (
 	<Page
