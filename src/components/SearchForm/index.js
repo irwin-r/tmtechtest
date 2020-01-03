@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 
 import { gutter } from '../../constants';
-
 import { Button, FlexGroup, Input } from '../../primitives';
 
 import { SearchFormClearButton, SearchFormIcon } from '..';

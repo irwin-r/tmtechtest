@@ -1,8 +1,8 @@
 import { Briefcase, SignIn } from '@githubprimer/octicons-react';
 import React, { useRef, useState } from 'react';
 import { useMount, useWindowScroll } from 'react-use';
-import { gutter } from '../../constants';
 
+import { gutter } from '../../constants';
 import { useUserContext } from '../../hooks';
 import { Container, FlexGroup } from '../../primitives';
 
