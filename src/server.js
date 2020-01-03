@@ -16,7 +16,7 @@ import { getJwtSecret, getListenPort, isDevelopmentEnvironment } from './utils';
 	await next.prepare();
 
 	const apollo = new ApolloServer({
-		context: createContext,
+		context: createContext(dataSources),
 		dataSources,
 		playground: {
 			settings: {
