@@ -31,7 +31,7 @@ const LoginForm = () => {
 	});
 
 	useEffect(() => {
-		setError(mutationError);
+		setError(mutationError?.message);
 
 		return () => {};
 	}, [mutationError]);
