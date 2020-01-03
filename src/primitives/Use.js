@@ -1,5 +1,12 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export const Use = forwardRef(({ as: Component, ...props }, ref) => (
+const Use = React.forwardRef(({ as: Component, ...props }, ref) => (
 	<Component {...props} ref={ref} />
 ));
+
+Use.propTypes = {
+	as: PropTypes.node.isRequired,
+};
+
+export default Use;

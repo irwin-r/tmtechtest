@@ -1,5 +1,3 @@
-import React from 'react';
-
 const paragraphs = [
 	'Gummies gingerbread pie ice cream. Fruitcake pastry caramels chupa chups candy. Candy canes jelly pastry. Sweet roll sweet lollipop. Apple pie icing pastry apple pie cake oat cake soufflé. Toffee cupcake danish fruitcake muffin. Apple pie dessert powder. Dessert jujubes halvah fruitcake cookie gummies caramels marzipan. Cheesecake pudding dragée candy.',
 	'Tiramisu sweet donut candy sesame snaps. Soufflé jelly wafer jelly beans powder biscuit pastry donut. Dragée marzipan bonbon cake chocolate chupa chups jujubes lollipop lemon drops. Sweet roll chocolate cake jelly-o cookie pastry. Bonbon jelly sesame snaps apple pie fruitcake donut gingerbread toffee dragée. Jelly muffin cookie chupa chups. Marshmallow jelly cookie soufflé cake marzipan sesame snaps. Oat cake jelly ice cream. Ice cream croissant tiramisu.',
@@ -43,9 +41,7 @@ function shuffle(arr) {
 	return array;
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export function generateLoremIpsum(n = 1) {
 	return shuffle(paragraphs).slice(0, n);
 }
-
-export const Lorem = ({ count }) =>
-	generateLoremIpsum(count).map((p, i) => <p key={i}>{p}</p>);

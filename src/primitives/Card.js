@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { borderRadius, gutter } from '../utils';
+import { borderRadius, gutter } from '../constants';
 
 export const Card = ({ pad, ...props }) => (
 	<div

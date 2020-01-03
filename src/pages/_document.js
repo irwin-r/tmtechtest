@@ -1,6 +1,6 @@
 import { extractCritical } from 'emotion-server';
-
 import Document, { Head, Main, NextScript } from 'next/document';
+import React from 'react';
 
 export default class MyDocument extends Document {
 	static async getInitialProps(ctx) {
@@ -10,24 +10,22 @@ export default class MyDocument extends Document {
 		return { ...initialProps, ...styles };
 	}
 
-	render() {
-		return (
-			<html lang="en">
-				<Head>
-					<meta charSet="utf-8" />
-					<meta
-						name="viewport"
-						content="width=device-width, initial-scale=1, shrink-to-fit=no"
-					/>
-					<meta name="theme-color" content="#000000" />
-					<link rel="stylesheet" href="/css/reset.css" />
-					<style dangerouslySetInnerHTML={{ __html: this.props.css }} />
-				</Head>
-				<body className="custom_class">
-					<Main />
-					<NextScript />
-				</body>
-			</html>
-		);
-	}
+	render = () => (
+		<html lang="en">
+			<Head>
+				<meta charSet="utf-8" />
+				<meta
+					name="viewport"
+					content="width=device-width, initial-scale=1, shrink-to-fit=no"
+				/>
+				<meta name="theme-color" content="#000000" />
+				<link rel="stylesheet" href="/css/reset.css" />
+				<style dangerouslySetInnerHTML={{ __html: this.props.css }} />
+			</Head>
+			<body>
+				<Main />
+				<NextScript />
+			</body>
+		</html>
+	);
 }

@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 
-import { Container, GridCell, Grid, Use } from './index';
-import { gutter } from '../utils';
+import { gutter } from '../constants';
+
+import { Container, GridCell, Grid, Use } from '.';
 
 export const Page = ({ contain = true, main, aside }) => (
 	<Use as={contain ? Container : Fragment}>

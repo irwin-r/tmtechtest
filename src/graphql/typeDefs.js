@@ -15,11 +15,6 @@ const typeDefs = gql`
 		dateAdded: DateTime!
 	}
 
-	type Session {
-		expires: DateTime!
-		token: String!
-	}
-
 	type User {
 		id: Int!
 		name: String!
@@ -30,12 +25,12 @@ const typeDefs = gql`
 	type Query {
 		job(jobId: String!): Job
 		jobs(searchTerm: String, offset: Int = 0, limit: Int = 20): [Job!]
-		user: User!
+		user: User
 	}
 
 	type Mutation {
-		login(email: String!): Session
-		logout: Boolean!
+		login(email: String!): User
+		logout: Boolean
 		removeFavorite(jobId: String!): User!
 		saveFavorite(jobId: String!): User!
 	}

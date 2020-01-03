@@ -1,15 +1,27 @@
-import ApolloClient, { InMemoryCache } from 'apollo-boost';
+import { HttpLink } from 'apollo-link-http';
+import fetch from 'isomorphic-unfetch';
 import getConfig from 'next/config';
-import withApollo from 'next-with-apollo';
+
+import withData from './withData';
 
 const {
 	publicRuntimeConfig: { apiEndpoint },
 } = getConfig();
 
-export default withApollo(
-	({ initialState = {} }) =>
-		new ApolloClient({
+const config = ctx => {
+	const sessionToken = ctx?.req?.cookies?.session;
+	const headers = sessionToken ? { Cookie: `session=${sessionToken}` } : {};
+
+	return {
+		link: new HttpLink({
+			credentials: 'same-origin',
+			headers,
 			uri: apiEndpoint,
-			cache: new InMemoryCache().restore(initialState),
-		})
-);
+			fetchOptions: {
+				credentials: 'same-origin',
+			},
+		}),
+	};
+};
+
+export default withData(config);

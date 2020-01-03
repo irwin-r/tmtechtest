@@ -24,10 +24,7 @@ const login = baseResolver.createResolver(
 			sameSite: true,
 		});
 
-		return {
-			expires,
-			token,
-		};
+		return user;
 	}
 );
 

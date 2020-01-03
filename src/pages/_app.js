@@ -1,41 +1,32 @@
-import App, { Container } from 'next/app';
-import fetch from 'isomorphic-unfetch';
-import getConfig from 'next/config';
+import NextApp from 'next/app';
 import React from 'react';
 
-import { UserProvider } from '../components/UserContext';
-import Navbar from '../components/Navbar';
+import { NavBar, UserProvider } from '../components';
 
-const {
-	publicRuntimeConfig: { apiEndpoint },
-} = getConfig();
-
-export default class MyApp extends React.Component {
-	static async getInitialProps({ Component, router, ctx }) {
+class App extends NextApp {
+	static async getInitialProps({ Component, ctx }) {
 		let pageProps = {};
 
-		// We need to forward the request headers on the server.
-		const url = `${apiEndpoint}/session`;
-		const headers = ctx.req ? { cookie: ctx.req.headers.cookie } : undefined;
-
-		const { user } = await fetch(url, { headers }).then(res => res.json());
-
 		if (Component.getInitialProps) {
-			pageProps = await Component.getInitialProps({ user, ...ctx });
+			pageProps = await Component.getInitialProps({ ...ctx });
 		}
 
-		return { pageProps, user };
+		return { pageProps };
 	}
 
-	render() {
-		const { Component, pageProps, user } = this.props;
+	render = () => {
+		const { Component, pageProps } = this.props;
+
 		return (
-			<UserProvider initialUserValue={user}>
+			<UserProvider>
 				<div className="App">
-					<Navbar />
+					<NavBar />
+					{/* eslint-disable-next-line react/jsx-props-no-spreading */}
 					<Component {...pageProps} />
 				</div>
 			</UserProvider>
 		);
-	}
+	};
 }
+
+export default App;
