@@ -30,6 +30,7 @@ module.exports = {
 	},
 	plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y'],
 	rules: {
+		'import/no-cycle': 0,
 		'jsx-a11y/label-has-associated-control': [
 			2,
 			{
