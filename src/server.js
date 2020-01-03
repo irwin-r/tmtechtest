@@ -40,15 +40,9 @@ import { getJwtSecret, getListenPort, isDevelopmentEnvironment } from './utils';
 		})
 	);
 
-	apollo.applyMiddleware({ app: express, bodyParserConfig: true });
+	apollo.applyMiddleware({ app: express, bodyParserConfig: true, cors: true });
 
 	express.use(Express.static('../public'));
-
-	express.get('/job/:jobId', (req, res) => {
-		const { jobId } = req.params;
-
-		next.render(req, res, '/job', { jobId, ...req.query });
-	});
 
 	express.get('*', next.getRequestHandler());
 
