@@ -1,12 +1,14 @@
-import React, { Fragment } from 'react';
 import { css } from 'emotion';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import { colors, formatDate, gutter } from '../utils';
-import { FlexGroup, H3 } from '../primitives';
-import { FavoriteInline } from './Favorite';
-import { Link } from './Router';
+import { colors, gutter } from '../../constants';
+import { FlexGroup, H3 } from '../../primitives';
+import { formatDate, jobShape } from '../../utils';
 
-export const JobItem = ({ job, index }) => (
+import { FavoriteInline, Link } from '..';
+
+const JobItem = ({ job, index }) => (
 	<>
 		{index ? (
 			<div
@@ -43,9 +45,16 @@ export const JobItem = ({ job, index }) => (
 				</div>
 				<FlexGroup isVertical>
 					<img src={job.logo} alt={job.source} style={{ maxWidth: 80 }} />
-					<FavoriteInline id={job.id} />
+					<FavoriteInline jobId={job.id} />
 				</FlexGroup>
 			</FlexGroup>
 		</div>
 	</>
 );
+
+JobItem.propTypes = {
+	index: PropTypes.number.isRequired,
+	job: jobShape.isRequired,
+};
+
+export default JobItem;
