@@ -39,6 +39,7 @@ module.exports = {
 				depth: 3,
 			},
 		],
+		'no-alert': 0,
 		'prettier/prettier': ['error', prettierOptions],
 		'react/jsx-filename-extension': 0,
 		'react/jsx-props-no-spreading': 0,

@@ -14,7 +14,6 @@ const useFavorite = jobId => {
 	});
 
 	if (!user) {
-		// eslint-disable-next-line no-alert
 		return [false, () => alert('You must be logged in to favorite.')];
 	}
 
