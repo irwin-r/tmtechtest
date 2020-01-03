@@ -1,15 +1,7 @@
-import ApolloClient, { InMemoryCache } from 'apollo-boost';
-import getConfig from 'next/config';
 import withApollo from 'next-with-apollo';
 
-const {
-	publicRuntimeConfig: { apiEndpoint },
-} = getConfig();
+import { createApolloClient } from '../utils';
 
-export default withApollo(
-	({ initialState = {} }) =>
-		new ApolloClient({
-			uri: apiEndpoint,
-			cache: new InMemoryCache().restore(initialState),
-		})
+export default withApollo(({ ctx, initialState = {} }) =>
+	createApolloClient(ctx, initialState)
 );

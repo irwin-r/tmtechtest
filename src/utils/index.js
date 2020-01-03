@@ -1,3 +1,4 @@
+export { default as createApolloClient } from './createApolloClient';
 export { default as createTokenExpiryDate } from './createTokenExpiryDate';
 export * from './environment';
 export { default as getJwtSecret } from './getJwtSecret';
