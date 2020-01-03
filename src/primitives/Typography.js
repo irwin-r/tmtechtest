@@ -1,8 +1,9 @@
 import { css } from 'emotion';
 import React from 'react';
 
-import { colors, gutter } from '../utils';
-import { Use } from './Use';
+import { colors, gutter } from '../constants';
+
+import Use from './Use';
 
 const Base = ({ as, styles, ...props }) => (
 	<Use

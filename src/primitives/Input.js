@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import { css } from 'emotion';
 
-import { colors, gutter } from '../utils';
+import { colors, gutter } from '../constants';
 
 const shadow = str => `${str}, inset 0 2px 1px rgba(0, 0, 0, 0.075)`;
 
