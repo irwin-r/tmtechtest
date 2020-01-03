@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { UserContext } from '../../context';
-import { withApollo } from '../../hoc';
 
 import { GET_USER_QUERY } from './queries';
 
@@ -19,4 +18,4 @@ UserProvider.propTypes = {
 	children: PropTypes.node.isRequired,
 };
 
-export default withApollo(UserProvider);
+export default UserProvider;
