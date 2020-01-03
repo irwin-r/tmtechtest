@@ -2,10 +2,11 @@ import Octicon from '@githubprimer/octicons-react';
 import React, { forwardRef } from 'react';
 import { css } from 'emotion';
 
-import { borderRadius, colors, gutter } from '../utils';
-import { Link } from '../components/Router';
+import { borderRadius, colors, gutter } from '../constants';
+import Link from '../components/Link';
+
 import { FlexGroup } from './FlexGroup';
-import { Use } from './Use';
+import Use from './Use';
 
 function makeSize(size) {
 	const sizes = {

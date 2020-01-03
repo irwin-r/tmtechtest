@@ -1,7 +1,6 @@
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 import React from 'react';
-
-import { css } from 'emotion';
 
 // Grid Parent
 // --------------------

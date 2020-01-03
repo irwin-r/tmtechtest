@@ -5,7 +5,7 @@ export const Environments = {
 };
 
 export const getEnvironment = () => {
-	const environment = (process.env?.NODE_ENV ?? '').toLowerCase();
+	const environment = process.env?.NODE_ENV?.toLowerCase();
 
 	switch (environment) {
 		case Environments.DEVELOPMENT:

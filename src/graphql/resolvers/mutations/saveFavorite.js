@@ -6,10 +6,9 @@ const saveFavorite = authenticatedResolver.createResolver(
 	(parent, { jobId }, context) => {
 		const {
 			dataSources: { jobService, userService },
-			session,
+			user,
 		} = context;
 
-		const user = userService.findById(session.userId);
 		const job = jobService.findById(jobId);
 
 		if (!job) {

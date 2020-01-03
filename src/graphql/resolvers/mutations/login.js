@@ -1,7 +1,7 @@
 import { AuthenticationError } from 'apollo-server-errors';
 
 import { JWT_COOKIE_NAME } from '../../../constants';
-import createTokenExpiryDate from '../../../utils/createTokenExpiryDate';
+import { createTokenExpiryDate } from '../../../utils';
 
 import { baseResolver } from '../acl';
 
@@ -24,10 +24,7 @@ const login = baseResolver.createResolver(
 			sameSite: true,
 		});
 
-		return {
-			expires,
-			token,
-		};
+		return user;
 	}
 );
 

@@ -1,113 +1,102 @@
-import React, { Component, Fragment } from 'react';
-import fetch from 'isomorphic-unfetch';
-import querystring from 'querystring';
-import getConfig from 'next/config';
-import Router from 'next/router';
+import { useQuery } from '@apollo/react-hooks';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
+import { JobItem, NoResults, SearchForm } from '../components';
 import { Button, Card, Container, Page } from '../primitives';
-import { SearchForm } from '../components/SearchForm';
-import { NoResults } from '../components/NoResults';
-import { JobItem } from '../components/JobItem';
-import { history } from '../utils';
 
-const {
-	publicRuntimeConfig: { apiEndpoint },
-} = getConfig();
+import { GET_JOBS_QUERY } from './_queries';
 
-export default class Home extends Component {
-	static async getInitialProps({ query: { search } }) {
-		const query = search ? `?${querystring.encode({ search })}` : '';
-		const url = `${apiEndpoint}/jobs${query}`;
+const HomePage = ({ initialSearchTerm }) => {
+	const router = useRouter();
+	const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
+	const {
+		data: { jobs = [] } = {},
+		error,
+		loading,
+		refetch: getJobs,
+	} = useQuery(GET_JOBS_QUERY, {
+		variables: { searchTerm: initialSearchTerm },
+	});
 
-		const { jobs } = await fetch(url).then(res => res.json());
+	const fetchJobs = (term = searchTerm) => getJobs({ searchTerm: term });
 
-		return { jobs, search };
-	}
-
-	state = {
-		jobs: this.props.jobs || [],
-		search: this.props.search || '',
+	const onChange = event => {
+		setSearchTerm(event?.target?.value);
 	};
 
-	onSearch = event => {
-		this.setState({ search: event.target.value });
+	const onClear = () => {
+		setSearchTerm('');
+		router.replace('/');
+		fetchJobs('');
 	};
 
-	handleSearchClear = () => {
-		this.setState({ search: '' }, () => {
-			Router.replace({
-				pathname: '/',
-			});
-			this.fetchResults();
-		});
+	const onSubmit = event => {
+		event.preventDefault();
+		fetchJobs();
+
+		if (searchTerm === '') {
+			router.replace('/');
+		} else {
+			router.replace('/', { query: { search: searchTerm } });
+		}
 	};
 
-	handleSearchSubmit = e => {
-		const { search } = this.state;
-		e.preventDefault();
-		Router.replace({
-			pathname: '/',
-			query: { search },
-		});
-		this.fetchResults({ search });
-	};
-
-	fetchResults = async opts => {
-		const search = querystring.encode(opts);
-		const query = search ? `?${search}` : '';
-		const { jobs } = await fetch(`${apiEndpoint}/jobs${query}`).then(res =>
-			res.json()
-		);
-		this.setState({ jobs });
-	};
-
-	uploadResume = () => {
+	const uploadResume = () => {
 		alert('Temporary disabled due to high demand!');
 	};
 
-	render() {
-		const { jobs, search } = this.state;
-		const hasNoResults = jobs.length === 0;
+	const hasNoResults = jobs.length === 0;
 
-		return (
-			<>
-				<Head>
-					<title>Job Search</title>
-				</Head>
-				<Container>
-					<SearchForm
-						onChange={this.onSearch}
-						onSubmit={this.handleSearchSubmit}
-						onClear={this.handleSearchClear}
-						value={search}
-					/>
-				</Container>
-				<Page
-					main={
-						<Card>
-							{hasNoResults && (
-								<NoResults onClearSearch={this.handleSearchClear} />
-							)}
-							{jobs.map((job, idx) => (
+	return (
+		<>
+			<Head>
+				<title>Job Search</title>
+			</Head>
+			<Container>
+				<SearchForm
+					onChange={onChange}
+					onSubmit={onSubmit}
+					onClear={onClear}
+					value={searchTerm}
+				/>
+			</Container>
+			<Page
+				main={
+					<Card>
+						{hasNoResults && <NoResults onClearSearch={onClear} />}
+						{!error &&
+							!loading &&
+							jobs.map((job, idx) => (
 								<JobItem key={job.id} job={job} index={idx} />
 							))}
-						</Card>
-					}
-					aside={
-						<>
-							<p>Let employers find you:</p>
-							<Button
-								appearance="secondary"
-								isBlock
-								onClick={this.uploadResume}
-							>
-								Upload your resumé
-							</Button>
-						</>
-					}
-				/>
-			</>
-		);
-	}
-}
+					</Card>
+				}
+				aside={
+					<>
+						<p>Let employers find you:</p>
+						<Button appearance="secondary" isBlock onClick={uploadResume}>
+							Upload your resumé
+						</Button>
+					</>
+				}
+			/>
+		</>
+	);
+};
+
+HomePage.defaultProps = {
+	initialSearchTerm: '',
+};
+
+HomePage.propTypes = {
+	initialSearchTerm: PropTypes.string,
+};
+
+HomePage.getInitialProps = ({ query: { search } } = {}) => ({
+	initialSearchTerm: search,
+});
+
+export default HomePage;
