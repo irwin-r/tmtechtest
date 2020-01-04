@@ -1,8 +1,6 @@
-import { authenticatedResolver } from '../acl';
+import { baseResolver } from '../acl';
 
-const user = authenticatedResolver.createResolver(
-	(parent, _, context) => context.user
-);
+const user = baseResolver.createResolver((parent, _, context) => context.user);
 
 export default {
 	Query: { user },
